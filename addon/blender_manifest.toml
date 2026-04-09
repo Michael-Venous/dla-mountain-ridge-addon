@@ -1,0 +1,40 @@
+# Blender extension manifest for DLA Mountain Terrain addon
+# See https://docs.blender.org/manual/en/latest/extensions/
+schema = "2.0"
+name = "DLA Mountain Terrain"
+id = "dla_mountain_terrain"
+version = "1.0.0"
+type = "add-on"
+
+authors = [
+    { name = "Your Name", email = "" }
+]
+
+maintainers = [
+    { name = "Your Name", email = "" }
+]
+
+license = "GPL-3.0-or-later"
+
+description = "Generate fractal mountain terrain using Diffusion‑Limited Aggregation (DLA) with real‑time blur and displacement controls."
+
+tags = ["terrain", "generator", "DLA", "geometry nodes", "mountains"]
+
+website = ""
+
+repository = ""
+
+blender_version_min = "5.0.0"
+blender_version_max = "5.9.9"
+
+# This addon requires the 'numba' package.
+pip = ["numba"]
+
+# Optional: declare additional system dependencies
+# system = []
+
+# The entry point is the __init__.py file.
+module = "."
+
+# The addon will be installed in the user's addons directory.
+# No additional files needed.
