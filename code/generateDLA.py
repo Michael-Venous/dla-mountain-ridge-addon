@@ -5,11 +5,11 @@ import time
 import numba
 
 # Config
-WIDTH = 512
-HEIGHT = 512
-NUM_PARTICLES = 150000
+WIDTH = 2048
+HEIGHT = 2048
+NUM_PARTICLES = 1000000
 FILENAME = "dla_optimized.png"
-STICKINESS = 0.3
+STICKINESS = 0.7 # How fart particles penetrate, lower = denser
 
 @numba.jit(nopython=True)
 def run_optimized_dla(width, height, num_particles, stickiness):
