@@ -8,6 +8,7 @@ Instead of relying on standard noise textures, this add-on simulates the random 
 ![image](https://github.com/Michael-Venous/dla-mountain-ridge-addon/blob/main/demo.png)
 ![image](https://github.com/Michael-Venous/dla-mountain-ridge-addon/blob/main/demo2.png)
 ![image](https://github.com/Michael-Venous/dla-mountain-ridge-addon/blob/main/demo3.png)
+![image](https://github.com/Michael-Venous/dla-mountain-ridge-addon/blob/main/code/dla_optimized.png)
 
 ## ✨ Features
 
