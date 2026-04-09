@@ -1,6 +1,6 @@
 # Blender extension manifest for DLA Mountain Terrain addon
 # See https://docs.blender.org/manual/en/latest/extensions/
-schema = "2.0"
+schema_version = "2.0.0"
 name = "DLA Mountain Terrain"
 id = "dla_mountain_terrain"
 version = "1.0.0"
@@ -24,7 +24,7 @@ website = ""
 
 repository = ""
 
-blender_version_min = "5.0.0"
+blender_version_min = "4.2.0"
 blender_version_max = "5.9.9"
 
 # This addon requires the 'numba' package.

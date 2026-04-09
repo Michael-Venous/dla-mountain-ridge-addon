@@ -12,11 +12,28 @@ PLANE_OBJECT_NAME = "DLA_Terrain"
 
 
 def get_geonode_group():
-    """Return the geometry node group 'mountain_displacer' or None if not found."""
+    """Return the geometry node group, appending it from the bundled asset if necessary."""
     node_groups = bpy.data.node_groups
     if GEONODE_GROUP_NAME in node_groups:
         return node_groups[GEONODE_GROUP_NAME]
-    logger.warning(f"Geometry node group '{GEONODE_GROUP_NAME}' not found.")
+
+    # If not found, append it from the included .blend file
+    addon_dir = os.path.dirname(__file__)
+    asset_path = os.path.join(addon_dir, "assets", "dla_nodes.blend")
+
+    if not os.path.exists(asset_path):
+        logger.error(f"Asset file not found at {asset_path}")
+        return None
+
+    with bpy.data.libraries.load(asset_path, link=False) as (data_from, data_to):
+        if GEONODE_GROUP_NAME in data_from.node_groups:
+            data_to.node_groups.append(GEONODE_GROUP_NAME)
+
+    if GEONODE_GROUP_NAME in bpy.data.node_groups:
+        logger.info(f"Appended {GEONODE_GROUP_NAME} from assets.")
+        return bpy.data.node_groups[GEONODE_GROUP_NAME]
+
+    logger.error("Failed to append the node group.")
     return None
 
 
@@ -74,12 +91,7 @@ def add_geonodes_modifier(obj, node_group):
 
 
 def update_modifier_inputs(scene):
-    """Pushes the UI blur properties directly to the geometry nodes modifier.
-    
-    This function should be called whenever any of the blur/intensity sliders
-    are changed. It reads the current values from scene.blur_properties and
-    writes them into the modifier's custom properties (socket identifiers).
-    """
+
     if PLANE_OBJECT_NAME not in bpy.data.objects:
         return
     
@@ -91,24 +103,20 @@ def update_modifier_inputs(scene):
     modifier = plane.modifiers[mod_name]
     props = scene.blur_properties
     
-    # NOTE: You MUST replace "Socket_1", "Socket_2", etc. with the actual 
-    # identifiers of your node group inputs. You can find these in Blender by 
-    # hovering over the modifier inputs and looking at the Python tooltip.
-    # The mapping below assumes the first four sockets are blur iterations,
-    # followed by four height multipliers, in the same order as the UI.
     
     try:
-        modifier["Socket_1"] = props.blur_iterations_1
-        modifier["Socket_2"] = props.blur_iterations_2
-        modifier["Socket_3"] = props.blur_iterations_3
-        modifier["Socket_4"] = props.blur_iterations_4
-        
-        modifier["Socket_5"] = props.height_multiplier_1
-        modifier["Socket_6"] = props.height_multiplier_2
-        modifier["Socket_7"] = props.height_multiplier_3
-        modifier["Socket_8"] = props.height_multiplier_4
+        modifier["Socket_X"] = props.blur_iterations_4  # huge_blur
+        modifier["Socket_X"] = props.blur_iterations_3  # large_blur
+        modifier["Socket_X"] = props.blur_iterations_2  # mid_blur
+        modifier["Socket_X"] = props.blur_iterations_1  # fine_blur
+
+        modifier["Socket_X"] = props.height_multiplier_1 # fine_mult
+        modifier["Socket_X"] = props.height_multiplier_2 # mid_mult
+        modifier["Socket_X"] = props.height_multiplier_3 # large_mult
+        modifier["Socket_X"] = props.height_multiplier_4 # huge_mult
+
     except KeyError as e:
-        logger.warning(f"Socket identifier {e} not found in modifier. Please adjust the mapping in geonodes.py.")
+        logger.warning(f"Socket identifier {e} not found in modifier.")
 
 
 def ensure_terrain_setup():

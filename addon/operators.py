@@ -13,7 +13,6 @@ class GENERATE_OT_dla_terrain(Operator):
     bl_description = "Run DLA simulation, create heightmap, and set up geometry nodes"
     bl_options = {'REGISTER', 'UNDO'}
     
-    # Optional: allow custom image name
     image_name: StringProperty(
         name="Heightmap Name",
         description="Name of the image datablock to store the DLA heightmap",
