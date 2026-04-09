@@ -16,7 +16,7 @@ class DLAProperties(PropertyGroup):
     resolution: IntProperty(
         name="Resolution",
         description="Width and height of the DLA grid (square)",
-        default=512,
+        default=128,
         min=64,
         max=4096,
         step=64,
@@ -26,7 +26,7 @@ class DLAProperties(PropertyGroup):
     particle_count: IntProperty(
         name="Particle Count",
         description="Number of particles to simulate",
-        default=150000,
+        default=10000,
         min=1000,
         max=1000000,
         step=1000,

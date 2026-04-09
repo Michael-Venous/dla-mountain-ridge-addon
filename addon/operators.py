@@ -1,3 +1,4 @@
+import os
 import bpy
 from bpy.props import StringProperty
 from bpy.types import Operator

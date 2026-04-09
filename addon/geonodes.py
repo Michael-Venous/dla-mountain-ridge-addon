@@ -1,10 +1,11 @@
+import os
 import bpy
 import logging
 
 logger = logging.getLogger(__name__)
 
 # Name of the geometry node group that must exist in the .blend file
-GEONODE_GROUP_NAME = "mountain_displacer"
+GEONODE_GROUP_NAME = "mountain"
 # Name of the image datablock that will be used as heightmap
 HEIGHTMAP_IMAGE_NAME = "DLA_Heightmap"
 # Name of the plane object to create (if not existing)
@@ -38,38 +39,24 @@ def get_geonode_group():
 
 
 def ensure_plane_object(subdivisions=512, size=1.0):
-    """Create or retrieve a subdivided plane for the terrain.
-    
-    The plane is placed at the origin, scaled to match the DLA grid (size units).
-    Subdivisions determine the mesh resolution for displacement.
-    
-    Returns the plane object.
-    """
     scene = bpy.context.scene
-    
-    # Check if the plane already exists
+
     if PLANE_OBJECT_NAME in bpy.data.objects:
         plane = bpy.data.objects[PLANE_OBJECT_NAME]
-        # Ensure it's a mesh
         if plane.type != 'MESH':
             logger.warning(f"Object '{PLANE_OBJECT_NAME}' exists but is not a mesh. Replacing.")
             bpy.data.objects.remove(plane, do_unlink=True)
         else:
             return plane
-    
-    # Create a new plane with subdivisions
+
+    # Create a new regular plane
     bpy.ops.mesh.primitive_plane_add(size=size, enter_editmode=False, align='WORLD')
     plane = bpy.context.active_object
     plane.name = PLANE_OBJECT_NAME
-    
-    # Subdivide the plane
-    bpy.ops.object.mode_set(mode='EDIT')
-    bpy.ops.mesh.subdivide(number_cuts=subdivisions - 1)
-    bpy.ops.object.mode_set(mode='OBJECT')
-    
-    # Move to origin (already at origin)
+
+    # Move to origin
     plane.location = (0, 0, 0)
-    
+
     return plane
 
 
