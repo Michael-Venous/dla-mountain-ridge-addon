@@ -4,6 +4,11 @@ A Blender 4.2+ extension that generates highly realistic, fractal-like mountain 
 
 Instead of relying on standard noise textures, this add-on simulates the random walk of thousands of particles to create natural, branching ridge structures. It automatically generates a heightmap, applies it to a plane, and sets up a Geometry Nodes displacement pipeline with non-destructive, real-time controls.
 
+## Examples
+![image](https://github.com/Michael-Venous/dla-mountain-ridge-addon/blob/main/demo.png)
+![image](https://github.com/Michael-Venous/dla-mountain-ridge-addon/blob/main/demo2.png)
+![image](https://github.com/Michael-Venous/dla-mountain-ridge-addon/blob/main/demo3.png)
+
 ## ✨ Features
 
 * **Optimized DLA Simulation:** Core simulation is accelerated using `numba` JIT compilation, allowing you to generate heightmaps with hundreds of thousands of particles in seconds.
