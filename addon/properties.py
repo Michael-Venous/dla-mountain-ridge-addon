@@ -145,7 +145,17 @@ class BlurProperties(PropertyGroup):
         subtype='FACTOR',
         update=on_blur_property_update
     )
-
+    final_multiplier: FloatProperty(
+        name="Final Multiplier",
+        description="Overall intensity multiplier for the final terrain displacement",
+        default=0.650,  # Matching the default from your screenshot
+        min=0.0,
+        max=10.0,
+        step=0.001,
+        precision=3,
+        subtype='FACTOR',
+        update=on_blur_property_update
+    )
 
 def register():
     """Register property groups and attach them to the Scene."""

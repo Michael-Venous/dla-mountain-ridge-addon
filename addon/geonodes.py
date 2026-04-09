@@ -105,15 +105,16 @@ def update_modifier_inputs(scene):
     
     
     try:
-        modifier["Socket_X"] = props.blur_iterations_4  # huge_blur
-        modifier["Socket_X"] = props.blur_iterations_3  # large_blur
-        modifier["Socket_X"] = props.blur_iterations_2  # mid_blur
-        modifier["Socket_X"] = props.blur_iterations_1  # fine_blur
+        modifier["Socket_2"] = props.blur_iterations_4  # huge_blur
+        modifier["Socket_3"] = props.blur_iterations_3  # large_blur
+        modifier["Socket_4"] = props.blur_iterations_2  # mid_blur
+        modifier["Socket_5"] = props.blur_iterations_1  # fine_blur
 
-        modifier["Socket_X"] = props.height_multiplier_1 # fine_mult
-        modifier["Socket_X"] = props.height_multiplier_2 # mid_mult
-        modifier["Socket_X"] = props.height_multiplier_3 # large_mult
-        modifier["Socket_X"] = props.height_multiplier_4 # huge_mult
+        modifier["Socket_6"] = props.height_multiplier_1 # fine_mult
+        modifier["Socket_7"] = props.height_multiplier_2 # mid_mult
+        modifier["Socket_8"] = props.height_multiplier_3 # large_mult
+        modifier["Socket_9"] = props.height_multiplier_4 # huge_mult
+        modifier["Socket_10"] = props.final_multiplier # final scale
 
     except KeyError as e:
         logger.warning(f"Socket identifier {e} not found in modifier.")
