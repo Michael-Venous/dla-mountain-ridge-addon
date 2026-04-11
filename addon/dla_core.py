@@ -3,15 +3,14 @@ import random
 import math
 import time
 
+# Robust check with verbose error capturing
 try:
     import numba
     HAVE_NUMBA = True
     NUMBA_ERROR = ""
-except Exception as e:  # Catch any exception, not just ImportError
+except Exception as e:
     HAVE_NUMBA = False
     NUMBA_ERROR = str(e)
-    print(f"DLA Add-on: Numba initialization failed - {NUMBA_ERROR}")
-
     # Create a dummy decorator that does nothing
     class numba:
         @staticmethod
@@ -36,7 +35,7 @@ DEFAULT_STICKINESS = 0.3
 @numba.jit(nopython=True)
 def run_optimized_dla(width, height, num_particles, stickiness):
     """Core DLA algorithm accelerated with Numba.
-    
+
     Returns a binary grid of shape (height, width) where 1 indicates a particle.
     """
     grid = np.zeros((height, width), dtype=np.uint8)
@@ -75,21 +74,21 @@ def run_optimized_dla(width, height, num_particles, stickiness):
             else:           particle_x += 1
 
             # Kill particle if it wanders too far or hits image boundary
-            if (particle_x < b_left - kill_distance or 
-                particle_x > b_right + kill_distance or 
-                particle_y < b_bottom - kill_distance or 
+            if (particle_x < b_left - kill_distance or
+                particle_x > b_right + kill_distance or
+                particle_y < b_bottom - kill_distance or
                 particle_y > b_top + kill_distance):
                 break
 
             if (particle_x <= 0 or particle_x >= width - 1
-                or particle_y <= 0 
+                or particle_y <= 0
                 or particle_y >= height - 1):
                 break
 
             has_neighbor = (
-                grid[particle_y-1, particle_x] or grid[particle_y+1, particle_x] or 
+                grid[particle_y-1, particle_x] or grid[particle_y+1, particle_x] or
                 grid[particle_y, particle_x-1] or grid[particle_y, particle_x+1] or
-                grid[particle_y-1, particle_x-1] or grid[particle_y-1, particle_x+1] or 
+                grid[particle_y-1, particle_x-1] or grid[particle_y-1, particle_x+1] or
                 grid[particle_y+1, particle_x-1] or grid[particle_y+1, particle_x+1]
             )
             # Check for attachment
@@ -108,30 +107,6 @@ def run_optimized_dla(width, height, num_particles, stickiness):
 def generate_dla_grid(width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT,
                       num_particles=DEFAULT_NUM_PARTICLES,
                       stickiness=DEFAULT_STICKINESS):
-    """Generate a DLA grid and return it as a float array normalized to [0, 1].
-    
-    This is the main function that should be called from the addon.
-    """
+    """Generate a DLA grid and return it as a float array normalized to [0, 1]."""
     grid = run_optimized_dla(width, height, num_particles, stickiness)
-    # Convert to float in range 0..1 (binary values remain 0.0 or 1.0)
     return grid.astype(np.float32)
-
-
-# Standalone test (only runs when executed as a script)
-if __name__ == '__main__':
-    print("Starting DLA generation...")
-    start_time = time.time()
-
-    dla_grid = generate_dla_grid()
-
-    end_time = time.time()
-    print(f"DLA generation complete. Total time: {end_time - start_time:.2f} seconds.")
-
-    # Save image if PIL is available
-    if HAVE_PIL:
-        image_array = (dla_grid * 255).astype(np.uint8)
-        img = Image.fromarray(image_array, 'L')
-        img.save("dla_optimized.png")
-        print("Saved DLA structure to dla_optimized.png")
-    else:
-        print("PIL not installed; skipping image export.")

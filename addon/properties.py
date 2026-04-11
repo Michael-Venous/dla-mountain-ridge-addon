@@ -16,7 +16,7 @@ class DLAProperties(PropertyGroup):
     resolution: IntProperty(
         name="Resolution",
         description="Width and height of the DLA grid (square)",
-        default=120,
+        default=256,
         min=64,
         max=4096,
         step=64,
@@ -27,8 +27,8 @@ class DLAProperties(PropertyGroup):
         name="Particle Count",
         description="Number of particles to simulate",
         default=10000,
-        min=1000,
-        max=1000000,
+        min=10,
+        max=10000000,
         step=1000,
         subtype='UNSIGNED'
     )
@@ -36,7 +36,7 @@ class DLAProperties(PropertyGroup):
     stickiness: FloatProperty(
         name="Stickiness",
         description="Probability of a particle sticking when it touches the cluster (0‑1)",
-        default=0.3,
+        default=0.6,
         min=0.01,
         max=1.0,
         step=0.01,
