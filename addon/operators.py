@@ -24,8 +24,11 @@ class GENERATE_OT_dla_terrain(Operator):
         scene = context.scene
         props = scene.dla_properties
         
-        self.report({'INFO'}, "Starting DLA generation...")
-        
+        if not dla_core.HAVE_NUMBA:
+            self.report({'WARNING'}, f"Numba missing/failed: {dla_core.NUMBA_ERROR}. Generation will be EXTREMELY slow!")
+        else:
+            self.report({'INFO'}, "Starting DLA generation (Optimized with Numba)...")
+
         # Generate DLA grid
         try:
             grid = dla_core.generate_dla_grid(

@@ -6,8 +6,12 @@ import time
 try:
     import numba
     HAVE_NUMBA = True
-except ImportError:
+    NUMBA_ERROR = ""
+except Exception as e:  # Catch any exception, not just ImportError
     HAVE_NUMBA = False
+    NUMBA_ERROR = str(e)
+    print(f"DLA Add-on: Numba initialization failed - {NUMBA_ERROR}")
+
     # Create a dummy decorator that does nothing
     class numba:
         @staticmethod
