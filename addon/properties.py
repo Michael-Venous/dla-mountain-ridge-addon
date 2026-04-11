@@ -16,7 +16,7 @@ class DLAProperties(PropertyGroup):
     resolution: IntProperty(
         name="Resolution",
         description="Width and height of the DLA grid (square)",
-        default=128,
+        default=120,
         min=64,
         max=4096,
         step=64,
@@ -56,7 +56,7 @@ class BlurProperties(PropertyGroup):
     blur_iterations_1: IntProperty(
         name="Blur Iterations 1",
         description="Number of blur iterations for the finest detail level",
-        default=500,
+        default=0,
         min=0,
         max=2000,
         step=10,
@@ -67,7 +67,7 @@ class BlurProperties(PropertyGroup):
     blur_iterations_2: IntProperty(
         name="Blur Iterations 2",
         description="Number of blur iterations for the second detail level",
-        default=50,
+        default=30,
         min=0,
         max=2000,
         step=10,
@@ -78,7 +78,7 @@ class BlurProperties(PropertyGroup):
     blur_iterations_3: IntProperty(
         name="Blur Iterations 3",
         description="Number of blur iterations for the third detail level",
-        default=30,
+        default=50,
         min=0,
         max=2000,
         step=10,
@@ -89,7 +89,7 @@ class BlurProperties(PropertyGroup):
     blur_iterations_4: IntProperty(
         name="Blur Iterations 4",
         description="Number of blur iterations for the largest detail level",
-        default=0,
+        default=500,
         min=0,
         max=2000,
         step=10,

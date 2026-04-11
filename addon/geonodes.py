@@ -127,31 +127,23 @@ def ensure_terrain_setup():
 
 
 def assign_heightmap_to_node_group(image_name=HEIGHTMAP_IMAGE_NAME):
-    """Find the Image Texture node inside the geometry node group and assign the image.
-    
-    This is optional because the image datablock is referenced by name; if the
-    node already uses the same name, the pixel data will be updated automatically.
-    """
     node_group = get_geonode_group()
     if node_group is None:
         return
-    
-    # Find the first node of type 'TEX_IMAGE'
-    image_node = None
-    for node in node_group.nodes:
-        if node.type == 'TEX_IMAGE':
-            image_node = node
-            break
-    
+
+    # Grab the node directly by the exact name you gave it
+    image_node = node_group.nodes.get("DLA_Texture_Node")
+
     if image_node is None:
-        logger.warning("No Image Texture node found in the geometry node group.")
+        print("ERROR: Could not find 'DLA_Texture_Node' in the master node group.")
         return
-    
-    # Assign the image datablock if it exists
+
+    # Link the generated heightmap datablock to the node's Image socket
     if image_name in bpy.data.images:
-        image_node.image = bpy.data.images[image_name]
+        image_node.inputs['Image'].default_value = bpy.data.images[image_name]
+        print(f"SUCCESS: Linked {image_name} to {image_node.name}!")
     else:
-        logger.warning(f"Image '{image_name}' not found; node will stay empty.")
+        print(f"ERROR: Image '{image_name}' not found in Blender data.")
 
 
 def register():
