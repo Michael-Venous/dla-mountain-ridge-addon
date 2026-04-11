@@ -22,7 +22,7 @@ class BlurProperties(PropertyGroup):
     height_multiplier_3: FloatProperty(name="Height Multiplier 3", default=0.250, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
     height_multiplier_4: FloatProperty(name="Height Multiplier 4", default=3.800, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
 
-    final_multiplier: FloatProperty(name="Final Multiplier", default=5, min=0.0, max=10.0, step=0.001, precision=3, subtype='FACTOR', update=on_blur_property_update)
+    final_multiplier: FloatProperty(name="Final Multiplier", default=7, min=0.0, max=10.0, step=0.001, precision=3, subtype='FACTOR', update=on_blur_property_update)
 
 def register():
     bpy.utils.register_class(DLAProperties)
