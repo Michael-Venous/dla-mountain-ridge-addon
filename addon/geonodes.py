@@ -74,9 +74,9 @@ def update_modifier_inputs(scene):
     }
 
     for key, val in sockets.items():
-        if key in modifier:
-            modifier[key] = val
-
+        modifier[key] = val
+    plane.update_tag()
+    
 def ensure_terrain_setup():
     node_group = get_geonode_group()
     if not node_group:
