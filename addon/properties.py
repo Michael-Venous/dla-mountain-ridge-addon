@@ -17,12 +17,12 @@ class BlurProperties(PropertyGroup):
     blur_iterations_3: IntProperty(name="Blur Iterations 3", default=50, min=0, max=2000, step=10, subtype='UNSIGNED', update=on_blur_property_update)
     blur_iterations_4: IntProperty(name="Blur Iterations 4", default=500, min=0, max=2000, step=10, subtype='UNSIGNED', update=on_blur_property_update)
 
-    height_multiplier_1: FloatProperty(name="Height Multiplier 1", default=0.004, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
-    height_multiplier_2: FloatProperty(name="Height Multiplier 2", default=0.100, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
-    height_multiplier_3: FloatProperty(name="Height Multiplier 3", default=0.250, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
-    height_multiplier_4: FloatProperty(name="Height Multiplier 4", default=3.800, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
+    height_multiplier_1: FloatProperty(name="Height Multiplier 1", default=1.000, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
+    height_multiplier_2: FloatProperty(name="Height Multiplier 2", default=1.000, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
+    height_multiplier_3: FloatProperty(name="Height Multiplier 3", default=1.000, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
+    height_multiplier_4: FloatProperty(name="Height Multiplier 4", default=1.000, min=0.0, max=100.0, step=0.001, precision=4, subtype='FACTOR', update=on_blur_property_update)
 
-    final_multiplier: FloatProperty(name="Final Multiplier", default=7, min=0.0, max=10.0, step=0.001, precision=3, subtype='FACTOR', update=on_blur_property_update)
+    final_multiplier: FloatProperty(name="Final Multiplier", default=1, min=0.0, max=10.0, step=0.001, precision=3, subtype='FACTOR', update=on_blur_property_update)
 
     subdivision_level: IntProperty(name="Subdivision Level", default=8, min=0, max=11, step=1, subtype='UNSIGNED', update=on_blur_property_update)
     
