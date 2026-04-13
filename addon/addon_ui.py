@@ -65,6 +65,10 @@ class VIEW3D_PT_dla_terrain(Panel):
             col.prop(scene.blur_properties, "height_multiplier_3", slider=True)
             col.prop(scene.blur_properties, "height_multiplier_4", slider=True)
             col.prop(scene.blur_properties, "final_multiplier", slider=True)
+            
+            col.separator()
+            col.label(text="Geometry:")
+            col.prop(scene.blur_properties, "subdivision_level", slider=True)
 
 def register():
     bpy.utils.register_class(VIEW3D_PT_dla_terrain)

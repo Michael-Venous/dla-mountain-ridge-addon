@@ -24,6 +24,8 @@ class BlurProperties(PropertyGroup):
 
     final_multiplier: FloatProperty(name="Final Multiplier", default=7, min=0.0, max=10.0, step=0.001, precision=3, subtype='FACTOR', update=on_blur_property_update)
 
+    subdivision_level: IntProperty(name="Subdivision Level", default=8, min=0, max=11, step=1, subtype='UNSIGNED', update=on_blur_property_update)
+    
 def register():
     bpy.utils.register_class(DLAProperties)
     bpy.utils.register_class(BlurProperties)

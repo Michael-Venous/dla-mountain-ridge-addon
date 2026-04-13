@@ -70,13 +70,14 @@ def update_modifier_inputs(scene):
         "Socket_7": props.height_multiplier_2,
         "Socket_8": props.height_multiplier_3,
         "Socket_9": props.height_multiplier_4,
-        "Socket_10": props.final_multiplier
+        "Socket_10": props.final_multiplier,
+        "Socket_11": props.subdivision_level
     }
 
     for key, val in sockets.items():
         modifier[key] = val
     plane.update_tag()
-    
+
 def ensure_terrain_setup():
     node_group = get_geonode_group()
     if not node_group:
